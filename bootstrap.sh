@@ -21,8 +21,13 @@ wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O
 chmod +x miniconda.sh
 ./miniconda.sh -b -p /home/vagrant/miniconda
 # ensures conda loaded in shell
-echo "source /home/vagrant/miniconda/etc/profile.d/conda.sh" >> /etc/profile
-source /home/vagrant/miniconda/etc/profile.d/conda.sh
+echo "export PATH=$PATH:/home/vagrant/miniconda/bin" >> /etc/profile
+export PATH="$PATH:/home/vagrant/miniconda/bin"
 
 ## create an environment for jupyter notebooks
 conda env create -f environment.yml
+
+##  start up system process for jupyter 
+systemctl enable jupyter.service
+systemctl daemon-reload
+systemctl restart jupyter.service

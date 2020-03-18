@@ -5,5 +5,10 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true  
   
   config.vm.provision "file", source: "environment.yml", destination: "/home/vagrant/"
+  config.vm.provision "file", source: "scripts/jupyter.service", destination: "/home/vagrant/"
+  config.vm.provision "file", source: "scripts/run_jupyter.sh", destination: "/home/vagrant/"
+  
+  config.vm.provision "shell",
+    inline: "mv /home/vagrant/jupyter.service /etc/systemd/system/jupyter.service"
   config.vm.provision :shell, path: "bootstrap.sh"
 end

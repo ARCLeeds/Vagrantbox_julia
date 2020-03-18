@@ -1,0 +1,9 @@
+[Unit]
+Description=Rung jupyter lab service
+[Service]
+User=vagrant
+Group=www-data
+ExecStart=/bin/bash /home/vagrant/scripts/
+
+[Install]
+WantedBy=multi-user.target
